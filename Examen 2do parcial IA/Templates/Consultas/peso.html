@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<script>
+    const freq_abs = eval("{{ freq_abs | safe }}");
+    const freq_rel = eval("{{ freq_rel | safe }}");
+    const freq_acum = eval("{{ freq_acum | safe }}");   
+</script>
+
+<main class="container">
+    <header>
+        <h1>Reporte Estadístico de Peso</h1>
+        <p>Análisis visual y numérico de los datos de peso recolectados.</p>
+    </header>
+
+    <hr>
+
+    <section id="graficos">
+    <article class="chart-box">
+        <h2>1. Frecuencia Absoluta</h2>
+        <div id="grafica-absoluta"></div>
+        <button onclick="render_graph(freq_abs, 'grafica-absoluta', 'bar', 'num', 'Frecuencia Absoluta')" class="btn btn-primary">Mostrar Barras</button>
+    </article>
+    <article class="chart-box">
+        <h2>2. Frecuencia Relativa</h2>
+        <div id="grafica-relativa"></div>
+        <button onclick="render_graph(freq_rel, 'grafica-relativa', 'donut', 'num', 'Porcentaje')" class="btn btn-primary">Mostrar Pastel</button>
+    </article>
+    <article class="chart-box">
+        <h2>3. Frecuencia Acumulada</h2>
+        <div id="grafica-acumulada"></div>
+        <button onclick="render_graph(freq_acum, 'grafica-acumulada', 'line', 'num', 'Frecuencia Acumulada')" class="btn btn-primary">Mostrar Acumulada</button>
+    </article>
+    <article class="chart-box">
+        <h2>4. Polígono de Frecuencias</h2>
+        <div id="grafica-poligono"></div>
+        <button onclick="render_graph(freq_abs, 'grafica-poligono', 'area', 'num', 'Frecuencia')" class="btn btn-primary">Mostrar Polígono</button>
+    </article>
+</section>
+
+    <hr>
+
+    <section id="medidas">
+        <h2>Medidas de Tendencia Central</h2>
+        <p>Valores numéricos básicos que resumen el centro de la distribución de peso:</p>
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Medida</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Media (Promedio)</strong></td>
+                    <td>{{ mean }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Mediana (Dato Central)</strong></td>
+                    <td>{{ median }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Moda (Más Repetido)</strong></td>
+                    <td>{{ mode }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <a href="/" class="btn btn-secondary">Regresar al Inicio</a>
+    </footer>
+</main>
+{% endblock %}
